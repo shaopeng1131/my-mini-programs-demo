@@ -1,0 +1,60 @@
+<!--pages/messageBoard/messageBoard.wxml-->
+<import src="../template/commentCell/commentCell.wxml" />
+<view class="userinfo" bindtap="loginSync">
+    <image
+        class="userinfo-avatar"
+        src="{{logged ? userInfo.avatarUrl : './../../image/msg/user-unlogin.png'}}"
+        background-size="cover"
+    ></image>
+    <view>
+        <text class="userinfo-nickname">{{logged ? userInfo.nickName : '点击登录'}}</text>
+        <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
+    </view>
+</view>
+<scroll-view class="scrollview" scroll-y="true">
+    <view class="containt hotcomment" hidden="{{hotcomemnt_hidden}}">
+        <text class="comment_text" >置顶留言</text>
+        <template is="commentCell" data="{{item}}"/>
+        <view class="divide_view"></view>
+    </view>
+
+    <view class="newcomment">
+        <text class="comment_text">最新留言</text>
+        <view wx:for="{{dataList}}" wx:for-item="item">
+            <template is="commentCell" data="{{item}}" />
+        </view>
+        
+    </view>
+</scroll-view>
+<view class="leaveWordBar" bindtap='bindMsgBox'>
+  <image class='leaveWordIcon' src="./../../image/msg/mainCellComment.png" mode="center"></image>
+</view>
+<view class="{{showMsgBox?'box-show':'box-hide'}}">
+ <form bindsubmit="submitData">
+ <view class="weui-cells weui-cells_after-title msg-box ">
+    <view class="weui-cell msg-box-content">
+     
+        <view class="weui-cell__bd">
+            <textarea bindinput="contentInputEvent" class="weui-textarea" name="content" value="{{content}}" placeholder="请输入文本" style="height: 3.3em" />
+            <!-- <view class="weui-textarea-counter t20">0/200</view> -->
+        </view>
+         <view class="weui-cell__ft">
+            <checkbox-group bindchange="bindAgreeChange">
+                <label class="weui-agree p0" for="weuiAgree">
+                    <view class="weui-agree__text">
+                        <checkbox class="weui-agree__checkbox" id="weuiAgree" name="isAgree" value="agree" checked="{{isAgree}}" />
+                        <view class="weui-agree__checkbox-icon">
+                            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                        </view>
+                        匿名
+                    </view>
+                </label>
+            </checkbox-group>
+            <button form-type="submit" bindtap="submitData" class="weui-btn mini-btn" type="primary" size="mini">发送</button>
+        </view>
+   
+    </view>
+  </view>
+</form>
+</view>
+

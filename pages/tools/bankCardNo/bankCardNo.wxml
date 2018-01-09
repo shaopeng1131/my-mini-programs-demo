@@ -1,0 +1,16 @@
+<!--pages/idCardNo/idCardNo.wxml-->
+<view class="container">
+  <view class="page-body">
+
+    <view class="page-section">
+      <view class="weui-cells__title">计算银行卡校验位:{{bankCardLast}}</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="number" maxlength='20'  bindinput="bindReplaceInput" placeholder="银行卡号前N位" />
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
